@@ -7,7 +7,6 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/beego/beego/v2/core/logs"
 	"github.com/robfig/cron/v3"
 )
 
@@ -87,7 +86,7 @@ func (rp *Repo) addTask() {
 	if e != nil {
 		return
 	}
-	nts := []Task{}
+	// nts := []Task{}
 	for _, v := range dir_list {
 		if strings.Contains(v.Name(), ".js") {
 			f, err := os.Open(rp.path + "/" + v.Name())
@@ -98,12 +97,12 @@ func (rp *Repo) addTask() {
 			f.Close()
 			res := regexp.MustCompile(`([\d\-,\*]+ [\d\-,\*]+ [\d\-,\*]+ [*]+ [*]+)[\s\S]+Env[(]['"]([^'"]+)['"][)]`).FindStringSubmatch(string(data))
 			if len(res) > 0 {
-				nts = append(nts, Task{
-					Cron:  res[1],
-					Name:  v.Name(),
-					Title: res[2],
-					Git:   rp.path,
-				})
+				// nts = append(nts, Task{
+				// 	Cron:  res[1],
+				// 	Name:  v.Name(),
+				// 	Title: res[2],
+				// 	Git:   rp.path,
+				// })
 			}
 		}
 	}
@@ -112,19 +111,19 @@ func (rp *Repo) addTask() {
 			c.Remove(cron.EntryID(rp.Task[i].ID))
 		}
 	}
-	rp.Task = nts
-	for i := range rp.Task {
-		task := &rp.Task[i]
-		eid, err := c.AddFunc(task.Cron, func() {
-			// if Cdle {
-			// 	return
-			// }
-			logs.Info("执行任务 %s %s ", task.Title, task.Cron)
-			runTask(task, &Sender{})
-		})
-		if err == nil {
-			logs.Info("添加任务 %s %s ", rp.Task[i].Title, rp.Task[i].Cron)
-			rp.Task[i].ID = int(eid)
-		}
-	}
+	// rp.Task = nts
+	// for i := range rp.Task {
+	// 	task := &rp.Task[i]
+	// 	eid, err := c.AddFunc(task.Cron, func() {
+	// 		// if Cdle {
+	// 		// 	return
+	// 		// }
+	// 		logs.Info("执行任务 %s %s ", task.Title, task.Cron)
+	// 		runTask(task, &Sender{})
+	// 	})
+	// 	if err == nil {
+	// 		logs.Info("添加任务 %s %s ", rp.Task[i].Title, rp.Task[i].Cron)
+	// 		rp.Task[i].ID = int(eid)
+	// 	}
+	// }
 }

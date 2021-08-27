@@ -7,8 +7,6 @@ import (
 	"strings"
 	"time"
 
-	"github.com/beego/beego/v2/client/httplib"
-	"github.com/beego/beego/v2/server/web"
 	"gorm.io/gorm"
 )
 
@@ -165,15 +163,16 @@ var codeSignals = []CodeSignal{
 	{
 		Command: []string{"qrcode", "扫码", "二维码", "scan"},
 		Handle: func(sender *Sender) interface{} {
-			url := fmt.Sprintf("http://127.0.0.1:%d/api/login/qrcode.png?tp=%s&uid=%d&gid=%d", web.BConfig.Listen.HTTPPort, sender.Type, sender.UserID, sender.ChatID)
-			if sender.Type == "tgg" {
-				url += fmt.Sprintf("&mid=%v&unm=%v", sender.MessageID, sender.Username)
-			}
-			rsp, err := httplib.Get(url).Response()
-			if err != nil {
-				return nil
-			}
-			return rsp
+			// url := fmt.Sprintf("http://127.0.0.1:%d/api/login/qrcode.png?tp=%s&uid=%d&gid=%d", web.BConfig.Listen.HTTPPort, sender.Type, sender.UserID, sender.ChatID)
+			// if sender.Type == "tgg" {
+			// 	url += fmt.Sprintf("&mid=%v&unm=%v", sender.MessageID, sender.Username)
+			// }
+			// rsp, err := httplib.Get(url).Response()
+			// if err != nil {
+			// 	return nil
+			// }
+			// return rsp
+			return "小滴滴和京东没有任何关系，请使用ninja。"
 		},
 	},
 	{
@@ -236,6 +235,7 @@ var codeSignals = []CodeSignal{
 	},
 	{
 		Command: []string{"查询", "query"},
+		Admin:   true,
 		Handle: func(sender *Sender) interface{} {
 			sender.handleJdCookies(func(ck *JdCookie) {
 				sender.Reply(ck.Query())
@@ -299,6 +299,7 @@ var codeSignals = []CodeSignal{
 	{
 		Command: []string{"许愿", "愿望", "wish", "hope", "want"},
 		Handle: func(sender *Sender) interface{} {
+			return "听不到，看不见。"
 			ct := sender.JoinContens()
 			if ct == "" {
 				rt := []string{}
@@ -455,6 +456,7 @@ var codeSignals = []CodeSignal{
 	},
 	{
 		Command: []string{"get-env", "env", "e"},
+		Admin:   true,
 		Handle: func(sender *Sender) interface{} {
 			ct := sender.JoinContens()
 			if ct == "" {
