@@ -277,7 +277,7 @@ var codeSignals = []CodeSignal{
 				baga = u.Coin
 				cost = u.Coin
 			}
-			if time.Now().Nanosecond()%10 < 6 || baga > 0 {
+			if time.Now().Nanosecond()%10 < 7 || baga > 0 {
 				sender.Reply(fmt.Sprintf("很遗憾你失去了%d枚许愿币。", cost))
 				cost = -cost
 			} else {
