@@ -284,9 +284,12 @@ var codeSignals = []CodeSignal{
 			} else {
 				if r == 9 {
 					cost *= 2
+					sender.Reply(fmt.Sprintf("恭喜你幸运暴击获得%d枚许愿币，20秒后自动转入余额。", cost))
+					time.Sleep(time.Second * 20)
+				} else {
+					sender.Reply(fmt.Sprintf("很幸运你获得%d枚许愿币，10秒后自动转入余额。", cost))
+					time.Sleep(time.Second * 10)
 				}
-				sender.Reply(fmt.Sprintf("很幸运你获得%d枚许愿币，10秒后自动转入余额。", cost))
-				time.Sleep(time.Second * 10)
 				sender.Reply(fmt.Sprintf("%d枚许愿币已到账。", cost))
 			}
 			db.Model(u).Update("coin", gorm.Expr(fmt.Sprintf("coin + %d", cost)))
