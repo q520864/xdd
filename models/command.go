@@ -59,16 +59,16 @@ func (sender *Sender) handleJdCookies(handle func(ck *JdCookie)) error {
 	a := sender.JoinContens()
 	ok := false
 	if !sender.IsAdmin || a == "" {
-		for i, ck := range cks {
+		for i := range cks {
 			if strings.Contains(sender.Type, "qq") {
-				if ck.QQ == sender.UserID {
+				if cks[i].QQ == sender.UserID {
 					if !ok {
 						ok = true
 					}
 					handle(&cks[i])
 				}
 			} else if strings.Contains(sender.Type, "tg") {
-				if ck.Telegram == sender.UserID {
+				if cks[i].Telegram == sender.UserID {
 					if !ok {
 						ok = true
 					}
@@ -647,26 +647,26 @@ var mx = map[int]bool{}
 func LimitJdCookie(cks []JdCookie, a string) []JdCookie {
 	ncks := []JdCookie{}
 	if s := strings.Split(a, "-"); len(s) == 2 {
-		for i, ck := range cks {
+		for i := range cks {
 			if i+1 >= Int(s[0]) && i+1 <= Int(s[1]) {
-				ncks = append(ncks, ck)
+				ncks = append(ncks, cks[i])
 			}
 		}
 	} else if x := regexp.MustCompile(`^[\s\d,]+$`).FindString(a); x != "" {
 		xx := regexp.MustCompile(`(\d+)`).FindAllStringSubmatch(a, -1)
-		for i, ck := range cks {
+		for i := range cks {
 			for _, x := range xx {
 				if fmt.Sprint(i+1) == x[1] {
-					ncks = append(ncks, ck)
+					ncks = append(ncks, cks[i])
 				}
 			}
 
 		}
 	} else if a != "" {
 		a = strings.Replace(a, " ", "", -1)
-		for _, ck := range cks {
-			if strings.Contains(ck.Note, a) || strings.Contains(ck.Nickname, a) || strings.Contains(ck.PtPin, a) {
-				ncks = append(ncks, ck)
+		for i := range cks {
+			if strings.Contains(cks[i].Note, a) || strings.Contains(cks[i].Nickname, a) || strings.Contains(cks[i].PtPin, a) {
+				ncks = append(ncks, cks[i])
 			}
 		}
 	}
