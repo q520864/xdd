@@ -277,10 +277,14 @@ var codeSignals = []CodeSignal{
 				baga = u.Coin
 				cost = u.Coin
 			}
-			if time.Now().Nanosecond()%10 < 7 || baga > 0 {
+			r := time.Now().Nanosecond() % 10
+			if r < 7 || baga > 0 {
 				sender.Reply(fmt.Sprintf("很遗憾你失去了%d枚许愿币。", cost))
 				cost = -cost
 			} else {
+				if r == 9 {
+					cost *= 2
+				}
 				sender.Reply(fmt.Sprintf("很幸运你获得%d枚许愿币，10秒后自动转入余额。", cost))
 				time.Sleep(time.Second * 10)
 				sender.Reply(fmt.Sprintf("%d枚许愿币已到账。", cost))
