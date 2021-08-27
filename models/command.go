@@ -59,20 +59,20 @@ func (sender *Sender) handleJdCookies(handle func(ck *JdCookie)) error {
 	a := sender.JoinContens()
 	ok := false
 	if !sender.IsAdmin || a == "" {
-		for _, ck := range cks {
+		for i, ck := range cks {
 			if strings.Contains(sender.Type, "qq") {
 				if ck.QQ == sender.UserID {
 					if !ok {
 						ok = true
 					}
-					handle(&ck)
+					handle(&cks[i])
 				}
 			} else if strings.Contains(sender.Type, "tg") {
 				if ck.Telegram == sender.UserID {
 					if !ok {
 						ok = true
 					}
-					handle(&ck)
+					handle(&cks[i])
 				}
 			}
 		}
@@ -86,8 +86,8 @@ func (sender *Sender) handleJdCookies(handle func(ck *JdCookie)) error {
 			sender.Reply("没有匹配的账号")
 			return errors.New("没有匹配的账号")
 		} else {
-			for _, ck := range cks {
-				handle(&ck)
+			for i := range cks {
+				handle(&cks[i])
 			}
 		}
 	}
