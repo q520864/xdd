@@ -198,6 +198,7 @@ var codeSignals = []CodeSignal{
 	},
 	{
 		Command: []string{"get-ua", "ua"},
+		Admin:   true,
 		Handle: func(sender *Sender) interface{} {
 			if !sender.IsAdmin {
 				coin := GetCoin(sender.UserID)
