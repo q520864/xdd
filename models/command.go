@@ -317,7 +317,7 @@ var codeSignals = []CodeSignal{
 					if sender.IsAdmin {
 						id = w.ID
 					}
-					rt = append(rt, fmt.Sprintf("%d.\t %s [%s]", id, w.Content, status))
+					rt = append(rt, fmt.Sprintf("%d. %s [%s]", id, w.Content, status))
 				}
 				return strings.Join(rt, "\n")
 			}
