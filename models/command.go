@@ -244,7 +244,7 @@ var codeSignals = []CodeSignal{
 		},
 	},
 	{
-		Command: []string{"发送", "send"},
+		Command: []string{"发送", "通知", "notify", "send"},
 		Admin:   true,
 		Handle: func(sender *Sender) interface{} {
 			if len(sender.Contents) < 2 {
