@@ -103,7 +103,6 @@ func initConfig() {
 		Config.Python = "python3"
 	}
 	if Config.Pip == "" {
-		Config.Pip = "Pip3"
+		Config.Pip = "pip3"
 	}
-
 }

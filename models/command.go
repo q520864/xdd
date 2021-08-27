@@ -116,7 +116,7 @@ var codeSignals = []CodeSignal{
 			var ntime = time.Now()
 			var first = false
 			total := []int{}
-			err := db.Where("class = ? and number = ?", sender.Type, sender.UserID).First(&u).Error
+			err := db.Where("number = ?", sender.UserID).First(&u).Error
 			if err != nil {
 				first = true
 				u = User{
