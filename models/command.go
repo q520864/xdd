@@ -253,6 +253,7 @@ var codeSignals = []CodeSignal{
 				rt := strings.Join(sender.Contents[1:], "\n")
 				sender.Contents = sender.Contents[0:0]
 				if sender.handleJdCookies(func(ck *JdCookie) {
+					fmt.Println(ck)
 					ck.Push(rt)
 				}) == nil {
 					return "操作成功"
