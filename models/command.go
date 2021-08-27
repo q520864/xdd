@@ -247,7 +247,15 @@ var codeSignals = []CodeSignal{
 		Command: []string{"发送", "send"},
 		Admin:   true,
 		Handle: func(sender *Sender) interface{} {
-			b.Send(tgg, sender.JoinContens())
+			if len(sender.Contents) < 2 {
+				sender.Reply("发送指令格式错误")
+			} else {
+				rt := strings.Join(sender.Contents[1:], "\n")
+				sender.Contents = sender.Contents[0:0]
+				sender.handleJdCookies(func(ck *JdCookie) {
+					ck.Push(rt)
+				})
+			}
 			return nil
 		},
 	},
