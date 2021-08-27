@@ -412,6 +412,21 @@ var codeSignals = []CodeSignal{
 		},
 	},
 	{
+		Command: []string{"优先级", "priority"},
+		Admin:   true,
+		Handle: func(sender *Sender) interface{} {
+			priority := Int(sender.Contents[0])
+			if len(sender.Contents) > 1 {
+				sender.Contents = sender.Contents[1:]
+				sender.handleJdCookies(func(ck *JdCookie) {
+					ck.Update(Priority, priority)
+					sender.Reply(fmt.Sprintf("已设置账号%s(%s)的优先级为%d。", ck.PtPin, ck.Nickname, priority))
+				})
+			}
+			return nil
+		},
+	},
+	{
 		Command: []string{"cmd", "command", "命令"},
 		Admin:   true,
 		Handle: func(sender *Sender) interface{} {
