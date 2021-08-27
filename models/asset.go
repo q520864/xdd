@@ -765,17 +765,17 @@ func jdzz(cookie string, state chan int64) { //
 	state <- int64(Int(mmc))
 }
 
-func jxgc() {
-	req := httplib.Get(fmt.Sprintf(`https://m.jingxi.com/dreamfactory/userinfo/GetUserInfo?zone=dream_factory&pin=&sharePin=&shareType=&materialTuanPin=&materialTuanId=&source=&sceneval=2&g_login_type=1&_time=${Date.now()}&_=${Date.now() + 2}&_ste=1`))
-	req.Header("Host", "api.m.jd.com")
-	req.Header("Accept-Language", "zh-cn")
-	req.Header("Accept-Encoding", "gzip, deflate, br")
-	req.Header("Referer", "http://wq.jd.com/wxapp/pages/hd-interaction/index/index")
-	req.Header("User-Agent", ua)
-	req.Header("cookie", cookie)
-	req.Header("Content-Type", "application/json")
-	data, _ := req.Bytes()
-}
+// func jxgc() {
+// 	req := httplib.Get(fmt.Sprintf(`https://m.jingxi.com/dreamfactory/userinfo/GetUserInfo?zone=dream_factory&pin=&sharePin=&shareType=&materialTuanPin=&materialTuanId=&source=&sceneval=2&g_login_type=1&_time=${Date.now()}&_=${Date.now() + 2}&_ste=1`))
+// 	req.Header("Host", "api.m.jd.com")
+// 	req.Header("Accept-Language", "zh-cn")
+// 	req.Header("Accept-Encoding", "gzip, deflate, br")
+// 	req.Header("Referer", "http://wq.jd.com/wxapp/pages/hd-interaction/index/index")
+// 	req.Header("User-Agent", ua)
+// 	req.Header("cookie", cookie)
+// 	req.Header("Content-Type", "application/json")
+// 	data, _ := req.Bytes()
+// }
 
 // // 惊喜的Taskurl
 // function jxTaskurl(functionId, body = '', stk) {
