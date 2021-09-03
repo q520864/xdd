@@ -44,7 +44,7 @@ type Yaml struct {
 var Balance = "balance"
 var Parallel = "parallel"
 var GhProxy = "https://ghproxy.com/"
-var Cdle = false
+var Cdle = true
 
 var Config Yaml
 

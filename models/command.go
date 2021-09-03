@@ -236,7 +236,7 @@ var codeSignals = []CodeSignal{
 	},
 	{
 		Command: []string{"查询", "query"},
-		Admin:   true,
+		Admin:   false,
 		Handle: func(sender *Sender) interface{} {
 			sender.handleJdCookies(func(ck *JdCookie) {
 				sender.Reply(ck.Query())
